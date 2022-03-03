@@ -6,7 +6,7 @@ const retrieveData = async(urls) => {
   const allQuestions = [];
   const checkDuplicates = [];
 
-  const maxQuestions = 6000;
+  const maxQuestions = 3000;
 
   let i = 0;
   while (allQuestions.length < maxQuestions) {
