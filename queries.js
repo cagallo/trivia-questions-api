@@ -10,7 +10,7 @@ module.exports = {
   },
   getQuestionsByCategory(request) {
     const category = request.query.category;
-    return database('questions').where('category', category).limit(20);
+    return database('questions').where('category', category).orderByRaw('RANDOM()').limit(20);
   },
   postUserQuestion(question) {
       return database('questions').insert(question, 'id');
