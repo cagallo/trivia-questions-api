@@ -12,14 +12,20 @@ app.use(cors())
 app.set('port', process.env.PORT || 3001);
 
 app.get('/api/v1/questions/all', (request, response) => {
-  queries.getAllQuestions(request)
+  queries.getAllQuestions()
     .then(data => response.status(200).json(data))
     .catch(error => response.status(500).json({ error }))
 });
 
 app.get('/api/v1/questions', (request, response) => {
   queries.getQuestionsByCategory(request)
-    .then(data => response.status(200).json(data))
+    .then(data => {
+      if (data.length === 0) {
+        response.status(404).json({"error": `No questions found for category ${request.query.category}`})
+      } else {
+        response.status(200).json(data)
+      }
+    })
     .catch(error => response.status(500).json({ error }))
 });
 

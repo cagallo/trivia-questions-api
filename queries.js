@@ -3,7 +3,7 @@ const connection = require('./knexfile')[process.env.NODE_ENV || 'development'];
 const database = require('knex')(connection);
 
 module.exports = {
-  getAllQuestions(request) {
+  getAllQuestions() {
     // get 20 questions at random
     let query = database('questions').select('*').orderByRaw('RANDOM()').limit(20);
     return query
